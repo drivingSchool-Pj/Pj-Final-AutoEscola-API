@@ -10,7 +10,7 @@ import { Location } from "./location.entity";
 import { User } from "./user.entity";
 
 @Entity("schedules")
-class Schedules {
+export class Schedules {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -29,5 +29,3 @@ class Schedules {
   @OneToMany(() => Location, (location) => location.schedules)
   location: Location[];
 }
-
-export { Schedules };

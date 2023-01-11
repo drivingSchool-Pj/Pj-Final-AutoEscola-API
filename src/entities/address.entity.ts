@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity("address")
-class Address {
+export class Address {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -17,5 +17,3 @@ class Address {
   @Column({ length: 100 })
   complement: string;
 }
-
-export { Address };

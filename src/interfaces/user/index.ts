@@ -2,7 +2,7 @@ export interface IUserRequest {
   id: string;
   name: string;
   email: string;
-  contact: number;
+  contact: string;
   age: number;
   cpf: string;
   isAdm: boolean;
