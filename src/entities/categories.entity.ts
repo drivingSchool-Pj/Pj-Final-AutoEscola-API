@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Instructors } from "./instructors.entity";
 
 @Entity("categories")
-class Categories {
+export class Categories {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -12,5 +12,3 @@ class Categories {
   @OneToMany(() => Instructors, (instructors) => instructors.categories)
   instructors: Instructors[];
 }
-
-export { Categories };

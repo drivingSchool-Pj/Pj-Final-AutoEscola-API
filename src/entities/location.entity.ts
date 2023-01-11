@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { Schedules } from "./schedules.entity";
 
 @Entity("location")
-class Location {
+export class Location {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -21,5 +21,3 @@ class Location {
   @ManyToOne(() => Schedules, (schedules) => schedules.location)
   schedules: Schedules;
 }
-
-export { Location };
