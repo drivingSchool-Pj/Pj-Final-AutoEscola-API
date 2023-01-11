@@ -1,3 +1,12 @@
+export interface IUserRequestAddress {
+  id: string;
+  street: string;
+  number: string;
+  complement?: string;
+  city: string;
+  state: string;
+}
+
 export interface IUserRequest {
   id: string;
   name: string;
@@ -8,6 +17,7 @@ export interface IUserRequest {
   isAdm: boolean;
   isActive: boolean;
   typeCategorie: string;
+  address: IUserRequestAddress;
   createdAt: Date;
   updatedAt: Date;
 }
