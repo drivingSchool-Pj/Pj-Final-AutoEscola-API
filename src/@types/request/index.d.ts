@@ -1,11 +1,16 @@
-import * as express from 'express'
+import * as express from "express";
 
-declare global{
+declare global {
   namespace Express {
-      interface Request {
-          validatedBody: object
-      }
+    interface Request {
+      validatedBody: object;
+      userDecode: {
+        id?: string;
+        sub?: string;
+        name: string;
+      };
+    }
   }
 }
 
-export {}
+export {};
