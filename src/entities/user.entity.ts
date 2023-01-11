@@ -16,7 +16,7 @@ import { Address } from "./address.entity";
 import { Schedules } from "./schedules.entity";
 
 @Entity("users")
-class User {
+export class User {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
@@ -32,11 +32,17 @@ class User {
   @Column()
   age: number;
 
+  @Column()
+  contact: string;
+
   @Column({ default: false })
   isAdm: boolean;
 
   @Column({ default: true, type: "boolean" })
   isActive: boolean;
+
+  @Column({ length: 2 })
+  typeCategorie: string;
 
   @CreateDateColumn({ type: "date" })
   createdAt: Date;
@@ -69,5 +75,3 @@ class User {
   @OneToMany(() => Schedules, (schedules) => schedules.user)
   schedules: Schedules[];
 }
-
-export { User };
