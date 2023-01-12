@@ -11,6 +11,9 @@ export class Address {
   @Column({ length: 2 })
   state: string;
 
+  @Column()
+  number: string;
+
   @Column({ length: 35 })
   city: string;
 

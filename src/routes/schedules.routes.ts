@@ -1,10 +1,17 @@
 import { Router } from "express";
-import { listAllSchedulesController, listScheduleByIdController} from "../controllers/schedules/schedules.controllers";
-import { ensureAuthMiddleware } from "../middlewares/ensureAuth.middleware";
+import {
+  listAllSchedulesController,
+  listScheduleByIdController,
+} from "../controllers/schedules/schedules.controllers";
+import { auhValidationMiddleware } from "../middlewares/ authValidation.middleware";
 
-const schedulesRoutes = Router()
+const schedulesRoutes = Router();
 
-schedulesRoutes.get('/:id', ensureAuthMiddleware, listScheduleByIdController)
-schedulesRoutes.get('', listAllSchedulesController)
+schedulesRoutes.get(
+  "/:id",
+  auhValidationMiddleware,
+  listScheduleByIdController
+);
+schedulesRoutes.get("", listAllSchedulesController);
 
-export default schedulesRoutes
+export default schedulesRoutes;
