@@ -15,7 +15,7 @@
 - Route: **/schedules/:id**
 - Esta rota lista as informações de um determinado agendamento através do id dele.
 
-## **GET schedules**
+<br>
 
-- Route: **/schedules**
+- Route: **/schedules**  
 - Esta rota lista todos os agendamentos existentes.
