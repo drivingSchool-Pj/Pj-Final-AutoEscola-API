@@ -7,7 +7,7 @@ export const listScheduleByIdController = async (
   res: Response
 ) => {
   const schedulesId = req.params.id;
-  const Adm = req.user.isAdm;
+  const Adm = req.userDecode.isAdm;
   const newSchedules = await listScheduleByIdService(schedulesId, Adm);
   return res.json(newSchedules);
 };
