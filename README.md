@@ -24,3 +24,8 @@
 
 - Rota: **/user**
 - Esta rota permite que o Admin liste todos os usuários que estão na tabela "users". O usuário deve ter a propriedade isActive como true, caso contrário ele não aparecerá na listagem.
+
+## **POST SCHEDULES**
+
+- Rota: **/schedules**
+- Esta rota permite o agendamento de aulas. Ela não permite que seja agendada aulas em horários já ocupados. Ela também não permite que um aluno marque duas aulas no mesmo horário e nem que um instrutor seja agendado por dois alunos diferentes no mesmo horário.
