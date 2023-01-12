@@ -5,9 +5,12 @@ import { listUserWithoutPasswordValidation } from "../../validations/schemas";
 export const listUserService = async () => {
   const userRepository = AppDataSource.getRepository(User);
 
-  const listUser = await userRepository.find();
+  const listUser = await userRepository.find({
+    relations: {
+      address: true,
+    },
+  });
 
-  console.log(listUser);
   const listUserWithoutPassword =
     await listUserWithoutPasswordValidation.validate(listUser, {
       stripUnknown: true,

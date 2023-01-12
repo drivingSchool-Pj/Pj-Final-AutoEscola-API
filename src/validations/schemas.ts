@@ -63,3 +63,11 @@ export const updateUser = yup.object().shape({
   isAdm: yup.boolean(),
   isActive: yup.boolean(),
 });
+
+export const Schedules = yup.object().shape({
+  date: yup.string().required(),
+  hour: yup.string().required(),
+  instructorsId: yup.string().required(),
+  userId: yup.string().required(),
+  locationId: yup.string().required(),
+});
