@@ -20,6 +20,8 @@
 | :-------- | :------- | :------------------------------------------------------------------- |
 | `/user`   | `string` | **Obrigatório:** A rota pode ser acessada apenas por administradores |
 
+=======
+
 #### Response - 200 OK
 
 ```json

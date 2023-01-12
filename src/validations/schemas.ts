@@ -24,6 +24,9 @@ export const userWithoutPasswordValidation: any = yup.object().shape({
   updatedAt: yup.date().notRequired(),
 });
 
+export const listUserWithoutPasswordValidation: SchemaOf<IUserRequest[]> =
+  yup.array(userWithoutPasswordValidation);
+
 export const userRegisterValidation: any = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().email().required(),
@@ -36,7 +39,7 @@ export const userRegisterValidation: any = yup.object().shape({
     .string()
     .required()
     .matches(
-      /(?=.*[A-E])/,
+      /(?=.*[A-E])/gi,
       "The driving license type is invalid. Type a letter from A - E"
     ),
   address: yup.object({
@@ -59,4 +62,12 @@ export const updateUser = yup.object().shape({
   typeCategorie: yup.string(),
   isAdm: yup.boolean(),
   isActive: yup.boolean(),
+});
+
+export const Schedules = yup.object().shape({
+  date: yup.string().required(),
+  hour: yup.string().required(),
+  instructorsId: yup.string().required(),
+  userId: yup.string().required(),
+  locationId: yup.string().required(),
 });

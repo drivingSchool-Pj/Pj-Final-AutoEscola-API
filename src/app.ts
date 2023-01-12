@@ -18,7 +18,7 @@ app.use("/address", addressRoutes);
 app.use("/login", loginRoutes);
 app.use("/user", userRoutes);
 app.use("/location", locationRoutes);
-app.use("/schedules/instructors", schedulesRoutes);
+app.use("/schedules", schedulesRoutes);
 app.use("/instructor", instructorsRoutes);
 app.use("/categories", categoriesRoutes);
 
