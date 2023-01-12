@@ -17,5 +17,10 @@
 
 <br>
 
-- Route: **/schedules**  
+- Route: **/schedules**
 - Esta rota lista todos os agendamentos existentes.
+
+## **GET user**
+
+- Rota: **/user**
+- Esta rota permite que o Admin liste todos os usuários que estão na tabela "users". O usuário deve ter a propriedade isActive como true, caso contrário ele não aparecerá na listagem.
