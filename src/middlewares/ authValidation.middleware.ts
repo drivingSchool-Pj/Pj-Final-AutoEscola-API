@@ -25,8 +25,8 @@ const auhValidationMiddleware = (
         throw new AppError(error.message, 401);
       }
       req.userDecode = {
-        id: decoded.sub,
-        name: decoded.name,
+        id: decoded.id,
+        isAdm: decoded.isAdm,
       };
       next();
     }

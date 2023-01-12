@@ -5,9 +5,8 @@ declare global {
     interface Request {
       validatedBody: object;
       userDecode: {
-        id?: string;
-        sub?: string;
-        name: string;
+        isAdm: boolean;
+        id: string;
       };
     }
   }

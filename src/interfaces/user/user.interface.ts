@@ -17,7 +17,8 @@ export interface IUser {
 export interface IUserDecode {
   id?: string;
   sub?: string;
-  name: string;
+  name?: string;
+  isAdm?: boolean;
   isActive?: boolean;
 }
 
