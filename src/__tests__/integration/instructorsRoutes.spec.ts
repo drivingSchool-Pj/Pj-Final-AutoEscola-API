@@ -92,7 +92,7 @@ describe("/instructor", () => {
     const categories = await request(app).get("/categories");
     mockedInstructor.categoryId = categories.body[0].id;
     const response = await request(app)
-      .post("/properties")
+      .post("/instructor")
       .send(mockedInstructor);
 
     expect(response.body).toHaveProperty("message");
