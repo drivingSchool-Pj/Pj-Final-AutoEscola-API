@@ -6,6 +6,7 @@ import { updateUser, userRegisterValidation } from "../validations/schemas";
 import updateUserController from "../controllers/user/updateUser.controller";
 import { validateSchemaMiddleware } from "../middlewares/validatedSchemas.middleware";
 import { listUserController } from "../controllers/user/listUser.controller";
+import ensureIsAdmMiddleware from "../middlewares/ensureVerifyIsAdm.middleware";
 
 export const userRoutes = Router();
 
@@ -17,7 +18,12 @@ userRoutes.post(
   createUserController
 );
 
-userRoutes.get("", listUserController);
+userRoutes.get(
+  "",
+  auhValidationMiddleware,
+  ensureIsAdmMiddleware,
+  listUserController
+);
 
 userRoutes.patch(
   "/:id",
