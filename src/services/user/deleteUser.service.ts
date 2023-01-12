@@ -13,7 +13,7 @@ export const softDeleteUserService = async (userId: string): Promise<User>=> {
 
   await userRepository.softRemove(foundUser)
   
-  const user = await userRepository.save({...foundUser, status: "removed"})
+  const user = await userRepository.save({...foundUser, isActive: false})
 
   return user
   
