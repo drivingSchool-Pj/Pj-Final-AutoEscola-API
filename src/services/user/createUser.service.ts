@@ -1,46 +1,46 @@
-import AppDataSource from '../../data-source'
-import { User } from '../../entities/user.entity'
-import { AppError } from '../../errors/appError'
-import { IUserRequest } from '../../interfaces/user'
-import { userWithoutPasswordValidation } from '../../validations/schemas'
+import AppDataSource from "../../data-source";
+import { Address } from "../../entities/address.entity";
+import { User } from "../../entities/user.entity";
+import { AppError } from "../../errors/appError";
+import { IUserRequest } from "../../interfaces/user/user.interface";
+
+import { userWithoutPasswordValidation } from "../../validations/schemas";
 
 export const createUserService = async (
   userData: IUserRequest
 ): Promise<IUserRequest> => {
-  const userRepository = AppDataSource.getRepository(User)
+  const { address } = userData;
+  const userRepository = AppDataSource.getRepository(User);
+  const addressRepository = AppDataSource.getRepository(Address);
 
   const userFind = await userRepository.findAndCountBy({
-    email: userData.email
-  })
+    email: userData.email,
+  });
 
   if (userFind[1] > 0) {
-    throw new AppError('Email already exists!', 409)
+    throw new AppError("Email already exists!", 409);
   }
 
   if (userData.age > 99) {
-    throw new AppError('Age number cannot be greater than 99!', 409)
+    throw new AppError("Age number cannot be greater than 99!", 409);
   }
 
-  if (
-    userData.typeCategorie !== 'A' &&
-    userData.typeCategorie !== 'AB' &&
-    userData.typeCategorie !== 'B' &&
-    userData.typeCategorie !== 'C' &&
-    userData.typeCategorie !== 'D' &&
-    userData.typeCategorie !== 'E'
-  ) {
-    throw new AppError('the wallet type must be A, B, C, D, E!', 409)
-  }
+  const newAddress = addressRepository.create(address);
 
-  const userCreate = userRepository.create(userData)
-  await userRepository.save(userCreate)
+  await addressRepository.save(newAddress);
+
+  const userCreate = userRepository.create({
+    ...userData,
+    address: newAddress,
+  });
+  await userRepository.save(userCreate);
 
   const userWithoutPassword = await userWithoutPasswordValidation.validate(
     userCreate,
     {
-      stripUnknown: true
+      stripUnknown: true,
     }
-  )
+  );
 
-  return userWithoutPassword
-}
+  return userWithoutPassword;
+};
