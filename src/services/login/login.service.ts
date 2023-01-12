@@ -19,7 +19,6 @@ export const createLoginService = async (data: IUserLogin) => {
 
   if (!user.isActive) throw new AppError("User is not active!", 400);
 
-  console.log(user.id);
   const token = jwt.sign(
     { isAdm: user.isAdm, id: user.id },
     process.env.SECRET_KEY,
