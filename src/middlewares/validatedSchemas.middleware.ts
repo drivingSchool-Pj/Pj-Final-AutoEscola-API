@@ -1,23 +1,23 @@
-import { Request, Response, NextFunction } from "express";
+import { Errback, Request, Response, NextFunction } from "express";
+import { AppError } from "../errors/appError";
 
-const validateSchemaMiddleware = (schemas: any) => async (req:Request, res:Response, next: NextFunction) =>{
+export const validateSchemaMiddleware =
+  (serializer: any) =>
+  async (req: Request, res: Response, next: NextFunction) => {
+    const validated = await serializer
+      .validate(req.body, {
+        stripUnknown: true,
+        abortEarly: false,
+      })
+      .catch((err: Errback) => {
+        return err;
+      });
 
-    try{
-    
-    const validated = await schemas.validate(req.body,{
-        stripUnknow: true,
-        abortEarly: true
-    })
-    
-        req.validatedBody = validated
-    
-        return next()
-    
-    }catch(err){
-
-        return res.status(400).send({message: err.message})
-
+    if (validated.errors) {
+      throw new AppError(validated.errors, 400);
     }
-}
 
-export default validateSchemaMiddleware
+    req.body = validated;
+
+    return next();
+  };

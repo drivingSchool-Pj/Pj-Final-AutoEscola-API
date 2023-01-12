@@ -4,7 +4,6 @@ import { compare } from "bcryptjs";
 import { IUserLogin } from "../../interfaces/login";
 import { User } from "../../entities/user.entity";
 import { AppError } from "../../errors/appError";
-
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
@@ -25,6 +24,7 @@ export const createLoginService = async (data: IUserLogin) => {
     process.env.SECRET_KEY,
     {
       expiresIn: "24h",
+      subject: user.id,
     }
   );
   return token;
