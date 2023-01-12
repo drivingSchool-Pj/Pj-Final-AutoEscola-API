@@ -18,7 +18,7 @@ const updateUserService = async (
   const userIsAdm: IUser[] = await userRepo.find({
     where: { id: userDecoded.id },
   });
-  console.log(userIsAdm);
+
   const { isAdm, isActive, id } = user;
 
   if (!userExist) {

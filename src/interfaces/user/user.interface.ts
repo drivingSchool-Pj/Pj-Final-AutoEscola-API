@@ -1,8 +1,22 @@
 export interface IUserRequest {
   name: string;
   email: string;
-  password: string;
+  contact: string;
+  age: number;
+  cpf: string;
   isAdm: boolean;
+  isActive?: boolean;
+  typeCategorie?: string;
+  address: IAddressRequest;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
+
+export interface IAddressRequest {
+  complement: string;
+  street: string;
+  city: string;
+  state: string;
 }
 
 export interface IUser {
