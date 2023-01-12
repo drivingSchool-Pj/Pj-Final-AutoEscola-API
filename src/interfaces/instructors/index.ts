@@ -1,1 +1,6 @@
-123
+export interface IInstructorRequest {
+    name: String,
+    categoryId: string,
+    
+  }
+  

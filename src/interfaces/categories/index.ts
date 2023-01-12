@@ -1,1 +1,5 @@
-123
+export interface ICategoryRequest{
+    typeCategorie:string,
+    
+
+}
