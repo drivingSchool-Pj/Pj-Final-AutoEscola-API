@@ -1,21 +1,21 @@
 import { DataSource } from "typeorm";
-import AppDataSource from "../../../data-source";
+import AppDataSource from "../../data-source";
 import request from "supertest";
-import app from "../../../app";
+import app from "../../app";
 import {
   mockedUser,
   mockedAdmin,
   mockedAdminLogin,
   mockedCategory,
-  mockedProperty,
   mockedUserLogin,
   mockedSchedule,
-  mockedScheduleInvalidPropertyId,
   mockedScheduleInvalidDate,
   mockedScheduleInvalidHourLess8,
-  mockedScheduleInvalidHourMore18,
-  mockedProperty2,
-} from "../../mocks";
+  mockedScheduleInvalidHourMore17,
+  mockedInstructor2,
+  mockedInstructor,
+  mockedScheduleInvalidInstructorId,
+} from "../mocks/index";
 
 describe("/schedules", () => {
   let connection: DataSource;
@@ -38,16 +38,16 @@ describe("/schedules", () => {
       .post("/categories")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
       .send(mockedCategory);
-    mockedProperty.categoryId = categories.body.id;
-    mockedProperty2.categoryId = categories.body.id;
+    mockedInstructor.categoryId = categories.body.id;
+    mockedInstructor2.categoryId = categories.body.id;
     await request(app)
       .post("/instructor")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
-      .send(mockedProperty);
+      .send(mockedInstructor);
     await request(app)
       .post("/instructor")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
-      .send(mockedProperty2);
+      .send(mockedInstructor2);
   });
 
   afterAll(async () => {
@@ -104,8 +104,6 @@ describe("/schedules", () => {
     expect(response.status).toBe(409);
   });
 
- 
-
   test("POST /schedules -  should not be able to create a schedule with an invalid date", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")
@@ -161,12 +159,12 @@ describe("/schedules", () => {
     const userLoginResponse = await request(app)
       .post("/login")
       .send(mockedUserLogin);
-    mockedScheduleInvalidHourMore18.instructorId = instructor.body[0].id;
-    mockedScheduleInvalidHourMore18.userId = users.body[1].id;
+    mockedScheduleInvalidHourMore17.instructorId = instructor.body[0].id;
+    mockedScheduleInvalidHourMore17.userId = users.body[1].id;
     const response = await request(app)
       .post("/schedules")
       .set("Authorization", `Bearer ${userLoginResponse.body.token}`)
-      .send(mockedScheduleInvalidHourMore18);
+      .send(mockedScheduleInvalidHourMore17);
 
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(400);
