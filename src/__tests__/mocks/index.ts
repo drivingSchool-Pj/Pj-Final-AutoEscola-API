@@ -1,3 +1,5 @@
+import { ICategoryRequest } from "../../interfaces/categories";
+import { IInstructorRequest } from "../../interfaces/instructors";
 import { IUserLogin } from "../../interfaces/login";
 import { IScheduleRequest } from "../../interfaces/schedules";
 import { IUserRequest } from "../../interfaces/user";
@@ -30,7 +32,7 @@ export const mockedAdminLogin: IUserLogin = {
   password: "123456",
 };
 
-export const mockedInstructor = {
+export const mockedInstructor: IInstructorRequest = {
   name: "Pedro Furtado",
   categoryId: "",
 };
@@ -39,12 +41,12 @@ export const mockedInstructor2 = {
   categoryId: "",
 };
 
-export const mockedInstructorInvalidCategoryId = {
+export const mockedInstructorInvalidCategoryId: IInstructorRequest = {
   name: "Pedro Furtado",
   categoryId: "8f9ae6ce-e36c-4d9d-9bd7-b4c98cb4e4f4",
 };
 
-export const mockedCategory = {
+export const mockedCategory: ICategoryRequest = {
   typeCategorie: "A",
 };
 
@@ -61,7 +63,6 @@ export const mockedScheduleInvalidInstructorId: IScheduleRequest = {
   instructorId: "b855d86b-d4c9-41cd-ab98-d7fa734c6ce4",
   userId: "",
 };
-
 export const mockedScheduleInvalidDate: IScheduleRequest = {
   date: "2022/08/20",
   hour: "10:30",
