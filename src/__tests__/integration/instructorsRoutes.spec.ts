@@ -65,7 +65,7 @@ describe("/instructor", () => {
       .send(mockedAdminLogin);
     mockedInstructor.categoryId = categories.body[0].id;
     const response = await request(app)
-      .post("/properties")
+      .post("/instructor")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
       .send(mockedInstructor);
 
