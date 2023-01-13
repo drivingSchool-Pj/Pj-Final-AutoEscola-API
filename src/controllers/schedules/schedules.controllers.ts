@@ -5,7 +5,6 @@ import { listScheduleByIdService } from "../../services/schedules/listScheduleBy
 import { createSchedulesService } from "../../services/schedules/createSchedules.service";
 
 import { IScheduleRequest } from "../../interfaces/schedules/schedules.interface";
-import { IUserDecode } from "../../interfaces/user/user.interface";
 
 export const listScheduleByIdController = async (
   req: Request,
@@ -42,3 +41,4 @@ export const createSchedulesController = async (
 
   return res.status(201).json(newSchedule);
 };
+
