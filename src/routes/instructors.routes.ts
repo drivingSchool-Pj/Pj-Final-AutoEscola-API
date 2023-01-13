@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { createInstructorController } from "../controllers/instructors/createinstructor.controller";
+import { createInstructorController } from "../controllers/instructors/createInstructor.controller";
 
 const instructorsRoutes = Router();
 
-instructorsRoutes.post("/instructors", createInstructorController);
+instructorsRoutes.post("", createInstructorController);
 
 export default instructorsRoutes;
