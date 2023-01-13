@@ -1,20 +1,18 @@
-import AppDataSource from "../../data-source"
-import { User } from "../../entities/user.entity"
-import { AppError } from "../../errors/appError"
+import AppDataSource from "../../data-source";
+import { User } from "../../entities/user.entity";
+import { AppError } from "../../errors/appError";
 
-export const softDeleteUserService = async (userId: string): Promise<User>=> {
+export const softDeleteUserService = async (userId: string) => {
+  const userRepository = AppDataSource.getRepository(User);
+  const foundUser = await userRepository.findOneBy({ id: userId });
 
-  const userRepository = AppDataSource.getRepository(User)
-  const foundUser = await userRepository.findOneBy({id: userId})
-
-  if(foundUser.isActive === false){
-    throw new AppError("user is already inactive", 404)
+  if (!foundUser) {
+    throw new AppError("user is already inactive", 404);
   }
 
-  await userRepository.softRemove(foundUser)
-  
-  const user = await userRepository.save({...foundUser, isActive: false})
+  await userRepository.softRemove(foundUser);
 
-  return user
-  
-}
+  await userRepository.save({ ...foundUser, isActive: false });
+
+  return;
+};
