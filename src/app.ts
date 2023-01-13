@@ -19,7 +19,7 @@ app.use("/login", loginRoutes);
 app.use("/user", userRoutes);
 app.use("/location", locationRoutes);
 app.use("/schedules", schedulesRoutes);
-app.use("/instructor", instructorsRoutes);
+app.use("/instructors", instructorsRoutes);
 app.use("/categories", categoriesRoutes);
 
 app.use(handleError);
