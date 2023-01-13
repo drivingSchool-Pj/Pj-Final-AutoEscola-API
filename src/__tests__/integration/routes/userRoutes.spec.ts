@@ -1,9 +1,10 @@
 import request from "supertest";
-import app from "../../app";
+import app from "../../../app";
 import { DataSource } from "typeorm";
-import AppDataSource from "../../data-source";
+import AppDataSource from "../../../data-source";
 import { describe } from "node:test";
-import { User } from "../../entities/user.entity";
+import { User } from "../../../entities/user.entity";
+import { sign } from "jsonwebtoken";
 
 describe("Testing user routes", () => {
   let connection: DataSource;
@@ -26,7 +27,7 @@ describe("Testing user routes", () => {
     await connection.destroy();
   });
 
-  it("Should be able to create user", async () => {
+  test("Should be able to create user", async () => {
     const user = {
       name: "batata",
       email: "batata@batata.com",
@@ -59,7 +60,7 @@ describe("Testing user routes", () => {
     expect(amount).toBe(1);
     expect(userCreated[0].password).toBeTruthy();
   });
-  it("Should not be able to create user with invalid body", async () => {
+  test("Should not be able to create user with invalid body", async () => {
     const user = {
       name: "",
       email: "",
@@ -80,7 +81,7 @@ describe("Testing user routes", () => {
     const [users, amount] = await userRepo.findAndCount();
     expect(amount).toBe(0);
   });
-  it("Should not be able to create user with email already registered", async () => {
+  test("Should not be able to create user with email already registered", async () => {
     const user = {
       name: "batata",
       email: "batata@batata.com",
@@ -111,4 +112,50 @@ describe("Testing user routes", () => {
       expect(err.message).toEqual(expect.any(String));
     }
   });
+  test("Should be able to list all users", async () => {
+    const token = sign("batata@batata.com", "testesegredin", {
+      subject: "batata",
+    });
+
+    const user = {
+      name: "batata",
+      email: "batata@batata.com",
+      password: "batata",
+      contact: 40028922,
+      age: 98,
+      cpf: "999.999.999-99",
+      isAdm: true,
+      typeCategory: "A",
+    };
+
+    const user2 = {
+      name: "batatão",
+      email: "bataton@batata.com",
+      password: "batatão",
+      contact: 40028923,
+      age: 97,
+      cpf: "999.999.999-98",
+      isAdm: false,
+      typeCategory: "B",
+    };
+
+    const send = await request(app).post('/users').send(user)
+    const send2 = await request(app).post('/users').send(user2)
+
+    const res = await request(app).get("/users").set("Authorization", `Bearer ${token}`).send();
+    expect(res.status).toBe(200);
+    expect(res.body).toHaveProperty("map")
+    const [users, amount] = await userRepo.findAndCount();
+    expect(amount).toBe(2);
+  });
+
+  test("Should not be able to list without being adm", async () => {
+    try{
+      const res = await request(app).get("/users").send();
+    } catch(err){
+      expect(err.status).toBe(401)
+      expect(err.body).toEqual({message: expect.any(String)})
+    }
+  })
+  
 });
