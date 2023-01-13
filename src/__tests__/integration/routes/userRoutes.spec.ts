@@ -2,7 +2,7 @@ import request from "supertest";
 import app from "../../../app";
 import { DataSource } from "typeorm";
 import AppDataSource from "../../../data-source";
-import { describe } from "node:test";
+
 import { User } from "../../../entities/user.entity";
 import { sign } from "jsonwebtoken";
 
