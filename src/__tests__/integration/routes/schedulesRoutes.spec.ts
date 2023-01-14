@@ -10,8 +10,6 @@ import {
   mockedUserLogin,
   mockedSchedule,
   mockedScheduleInvalidDate,
-  mockedScheduleInvalidHourLess8,
-  mockedScheduleInvalidHourMore17,
   mockedInstructor2,
   mockedInstructor,
   mockedScheduleInvalidInstructorId,
