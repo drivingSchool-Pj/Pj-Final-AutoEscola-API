@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { listAllSchedulesInIstructorController } from "../controllers/schedules/listAllSchedulesInIstructor.controller";
 import { listAllSchedulesInUserController } from "../controllers/schedules/listAllSchedulesInUser.controller";
 
 import {
@@ -11,8 +12,9 @@ import { auhValidationMiddleware } from "../middlewares/ authValidation.middlewa
 const schedulesRoutes = Router();
 
 schedulesRoutes.post("", auhValidationMiddleware, createSchedulesController);
-schedulesRoutes.get("/instructors/:id", auhValidationMiddleware, listScheduleByIdController);
-schedulesRoutes.get("/instructors", listAllSchedulesController);
+schedulesRoutes.get("/:id", auhValidationMiddleware, listScheduleByIdController);
+schedulesRoutes.get("", listAllSchedulesController);
 schedulesRoutes.get("/student/:id", auhValidationMiddleware, listAllSchedulesInUserController)
+schedulesRoutes.get("/instructors/:id", auhValidationMiddleware, listAllSchedulesInIstructorController)
 
 export default schedulesRoutes;

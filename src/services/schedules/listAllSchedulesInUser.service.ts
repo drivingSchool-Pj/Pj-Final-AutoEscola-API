@@ -3,7 +3,7 @@ import { Schedules } from "../../entities/schedules.entity"
 import { User } from "../../entities/user.entity"
 import { AppError } from "../../errors/appError"
 
-export const listAllSchedulesInUserService = async (userId: string, isAdm: boolean, userAcess: string) =>{
+export const listAllSchedulesInUserService = async (userId: any, isAdm: boolean, userAcess: string) =>{
   
   const schedulesRepository = AppDataSource.getRepository(Schedules)
   const userRepository = AppDataSource.getRepository(User)
