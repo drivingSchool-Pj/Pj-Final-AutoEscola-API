@@ -163,6 +163,12 @@ describe("/Testing schedules routes", () => {
     expect(response.status).toBe(401);
   });
   
+  test("GET /schedules -  Must be able to list all schedules", async () => {
+    const response = await request(app).get("/instructor");
+    expect(response.body).toHaveLength(1);
+    expect(response.status).toBe(200);
+  });
+
   test("GET /schedules/instructor/:id -  must be able to list the schedules of an instructor", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")

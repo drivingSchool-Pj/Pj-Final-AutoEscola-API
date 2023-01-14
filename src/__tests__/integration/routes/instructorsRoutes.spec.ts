@@ -67,6 +67,7 @@ describe("/Testing instructor routes", () => {
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(403);
   });
+  
   test("POST /instructor -  should not be able to create a instructor without authentication", async () => {
     const categories = await request(app).get("/categories");
     mockedInstructor.categoryId = categories.body[0].id;
