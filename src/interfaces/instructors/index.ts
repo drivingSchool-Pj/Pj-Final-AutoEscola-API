@@ -1,6 +1,4 @@
-export interface IInstructorRequest {
-    name: String,
-    categoryId: string,
-    
-  }
-  
+export interface IInstructorCreate {
+  id: string;
+  category: string;
+}
