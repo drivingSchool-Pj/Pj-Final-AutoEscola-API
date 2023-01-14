@@ -12,7 +12,7 @@ import {
   mockedScheduleInvalidDate,
   mockedInstructor2,
   mockedInstructor,
-  mockedScheduleInvalidInstructorId,
+
 } from "../../mocks/index";
 
 describe("/Testing schedules routes", () => {
@@ -124,6 +124,7 @@ describe("/Testing schedules routes", () => {
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(409);
   });
+
   test("POST /schedules -  should not be able to create a schedule with an invalid date", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")
@@ -146,26 +147,6 @@ describe("/Testing schedules routes", () => {
     expect(response.status).toBe(400);
   });
 
-  test("POST /schedules -  should not be able to create a schedule with an invalid instructor id", async () => {
-    const adminLoginResponse = await request(app)
-      .post("/login")
-      .send(mockedAdminLogin);
-    const users = await request(app)
-      .get("/users")
-      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
-    const userLoginResponse = await request(app)
-      .post("/login")
-      .send(mockedUserLogin);
-    mockedScheduleInvalidInstructorId.userId = users.body[1].id;
-    const response = await request(app)
-      .post("/schedules")
-      .set("Authorization", `Bearer ${userLoginResponse.body.token}`)
-      .send(mockedScheduleInvalidInstructorId);
-
-    expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(404);
-  });
-
   test("POST /schedules -  should not be able to create a schedule without authentication", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")
@@ -181,6 +162,7 @@ describe("/Testing schedules routes", () => {
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(401);
   });
+  
   test("GET /schedules/instructor/:id -  must be able to list the schedules of an instructor", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")

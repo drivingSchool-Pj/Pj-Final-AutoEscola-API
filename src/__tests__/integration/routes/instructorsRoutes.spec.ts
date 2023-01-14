@@ -8,7 +8,6 @@ import {
   mockedAdminLogin,
   mockedUserLogin,
   mockedInstructor,
-  
 } from "../../mocks/index";
 
 describe("/Testing instructor routes", () => {
@@ -68,6 +67,16 @@ describe("/Testing instructor routes", () => {
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(403);
   });
+  test("POST /instructor -  should not be able to create a instructor without authentication", async () => {
+    const categories = await request(app).get("/categories");
+    mockedInstructor.categoryId = categories.body[0].id;
+    const response = await request(app)
+      .post("/instructor")
+      .send(mockedInstructor);
+
+    expect(response.body).toHaveProperty("message");
+    expect(response.status).toBe(401);
+  });
 
   test("POST /instructor -  should not be able to create instructor that already exists", async () => {
     const categories = await request(app).get("/categories");
@@ -82,17 +91,6 @@ describe("/Testing instructor routes", () => {
 
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(409);
-  });
-
-  test("POST /instructor -  should not be able to create a instructor without authentication", async () => {
-    const categories = await request(app).get("/categories");
-    mockedInstructor.categoryId = categories.body[0].id;
-    const response = await request(app)
-      .post("/instructor")
-      .send(mockedInstructor);
-
-    expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(401);
   });
 
   test("DELETE /instructor/:id -  should not be able to delete a instructor not being admin", async () => {
@@ -113,6 +111,7 @@ describe("/Testing instructor routes", () => {
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(403);
   });
+
   test("DELETE /instructor/:id -  Must be able to soft delete an instructor", async () => {
     await request(app).post("/instructor").send(mockedAdmin);
 
@@ -132,6 +131,7 @@ describe("/Testing instructor routes", () => {
     expect(response.status).toBe(204);
     expect(findCategory.body[0].isActive).toBe(false);
   });
+
   test("GET /instructor/:id -  must be able to list the informations of an instructor", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")
@@ -158,19 +158,6 @@ describe("/Testing instructor routes", () => {
     const instructors = await request(app).get("/instructors");
     const response = await request(app)
       .get(`/instructor/${instructors.body[0].id}`)
-      .set("Authorization", `Bearer ${userLoginResponse.body.token}`);
-
-    expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(403);
-  });
-
-  test("GET /instructor/:id -  should not be able to list the informations of an instructor not being admin", async () => {
-    const userLoginResponse = await request(app)
-      .post("/login")
-      .send(mockedUserLogin);
-    const instructor = await request(app).get("/instructor");
-    const response = await request(app)
-      .get(`/instructor/${instructor.body[0].id}`)
       .set("Authorization", `Bearer ${userLoginResponse.body.token}`);
 
     expect(response.body).toHaveProperty("message");

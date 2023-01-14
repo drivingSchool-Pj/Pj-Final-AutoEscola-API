@@ -43,7 +43,14 @@ describe("/categories routes", () => {
     expect(response.body).toHaveProperty("id");
     expect(response.status).toBe(201);
   });
+  test("POST /categories -  should not be able to create category without authentication", async () => {
+    const response = await request(app)
+      .post("/categories")
+      .send(mockedCategory);
 
+    expect(response.body).toHaveProperty("message");
+    expect(response.status).toBe(401);
+  });
   test("POST /categories - should not be able to create category not being admin", async () => {
     const userLoginResponse = await request(app)
       .post("/login")
@@ -69,65 +76,30 @@ describe("/categories routes", () => {
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(409);
   });
+  test("PATCH /categories/:id -  should be able to update category", async () => {
+    const newValues = { name: "B" };
 
-  test("POST /categories -  should not be able to create category without authentication", async () => {
-    const response = await request(app)
-      .post("/categories")
-      .send(mockedCategory);
-
-    expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(401);
-  });
-
-  test("POST /categories - should not be able to create category not being admin", async () => {
-    const userLoginResponse = await request(app)
-      .post("/login")
-      .send(mockedUserLogin);
-    const response = await request(app)
-      .post("/categories")
-      .set("Authorization", `Bearer ${userLoginResponse.body.token}`)
-      .send(mockedCategory);
-
-    expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(403);
-  });
-
-  test("DELETE /categories/:id -  should not be able to delete category not being admin", async () => {
-    const userLoginResponse = await request(app)
-      .post("/login")
-      .send(mockedUserLogin);
-    const adminLoginResponse = await request(app)
+    const admingLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin);
-    const CategoryTobeDeleted = await request(app)
+    const token = `Bearer ${admingLoginResponse.body.token}`;
+
+    const categoryTobeUpdateRequest = await request(app)
       .get("/categories")
-      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
+      .set("Authorization", token);
+    const categoryTobeUpdateId = categoryTobeUpdateRequest.body[0].id;
 
     const response = await request(app)
-      .delete(`/categories/${CategoryTobeDeleted.body[0].id}`)
-      .set("Authorization", `Bearer ${userLoginResponse.body.token}`);
+      .patch(`/categories/${categoryTobeUpdateId}`)
+      .set("Authorization", token)
+      .send(newValues);
 
-    expect(response.body).toHaveProperty("message");
-    expect(response.status).toBe(403);
-  });
-  test("DELETE /categories/:id -  Must be able to soft delete category", async () => {
-    await request(app).post("/categories").send(mockedAdmin);
-
-    const adminLoginResponse = await request(app)
-      .post("/login")
-      .send(mockedAdminLogin);
-    const CategoryTobeDeleted = await request(app)
+    const categoryUpdated = await request(app)
       .get("/categories")
-      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
+      .set("Authorization", token);
 
-    const response = await request(app)
-      .delete(`/categories/${CategoryTobeDeleted.body[0].id}`)
-      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
-    const findCategory = await request(app)
-      .get("/categories")
-      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
-    expect(response.status).toBe(204);
-    expect(findCategory.body[0].isActive).toBe(false);
+    expect(response.status).toBe(200);
+    expect(categoryUpdated.body[0].name).toEqual("B");
   });
 
   test("PATCH /categories/instructor/:id - should not be able to update category of an instructor without adm permission", async () => {
@@ -156,30 +128,43 @@ describe("/categories routes", () => {
     expect(response.status).toBe(401);
   });
 
-  test("PATCH /categories/:id -  should be able to update category", async () => {
-    const newValues = { name: "B" };
+  test("DELETE /categories/:id -  Must be able to soft delete category", async () => {
+    await request(app).post("/categories").send(mockedAdmin);
 
-    const admingLoginResponse = await request(app)
+    const adminLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin);
-    const token = `Bearer ${admingLoginResponse.body.token}`;
-
-    const categoryTobeUpdateRequest = await request(app)
+    const CategoryTobeDeleted = await request(app)
       .get("/categories")
-      .set("Authorization", token);
-    const categoryTobeUpdateId = categoryTobeUpdateRequest.body[0].id;
+      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
 
     const response = await request(app)
-      .patch(`/categories/${categoryTobeUpdateId}`)
-      .set("Authorization", token)
-      .send(newValues);
-
-    const categoryUpdated = await request(app)
+      .delete(`/categories/${CategoryTobeDeleted.body[0].id}`)
+      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
+    const findCategory = await request(app)
       .get("/categories")
-      .set("Authorization", token);
+      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
+    expect(response.status).toBe(204);
+    expect(findCategory.body[0].isActive).toBe(false);
+  });
 
-    expect(response.status).toBe(200);
-    expect(categoryUpdated.body[0].name).toEqual("B");
+  test("DELETE /categories/:id -  should not be able to delete category not being admin", async () => {
+    const userLoginResponse = await request(app)
+      .post("/login")
+      .send(mockedUserLogin);
+    const adminLoginResponse = await request(app)
+      .post("/login")
+      .send(mockedAdminLogin);
+    const CategoryTobeDeleted = await request(app)
+      .get("/categories")
+      .set("Authorization", `Bearer ${adminLoginResponse.body.token}`);
+
+    const response = await request(app)
+      .delete(`/categories/${CategoryTobeDeleted.body[0].id}`)
+      .set("Authorization", `Bearer ${userLoginResponse.body.token}`);
+
+    expect(response.body).toHaveProperty("message");
+    expect(response.status).toBe(403);
   });
 
   test("GET /categories/instructor/:id -  must be able to list the categories of an instructor", async () => {
@@ -220,6 +205,7 @@ describe("/categories routes", () => {
     expect(response.body).toHaveProperty("message");
     expect(response.status).toBe(403);
   });
+
   test("GET /categories -  Must be able to list all categories", async () => {
     const response = await request(app).get("/categories");
     expect(response.body).toHaveLength(1);
