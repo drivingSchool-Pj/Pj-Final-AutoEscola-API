@@ -1,1 +1,4 @@
-123
+export interface ICategoryData {
+    name:string
+  }
+  

@@ -71,3 +71,6 @@ export const Schedules = yup.object().shape({
   userId: yup.string().required(),
   locationId: yup.string().required(),
 });
+export const updatedCategory =yup.object().shape({
+ name: yup.string().required(),
+});
