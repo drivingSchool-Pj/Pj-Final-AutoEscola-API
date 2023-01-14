@@ -6,7 +6,12 @@ import ensureIsAdmMiddleware from "../middlewares/ensureVerifyIsAdm.middleware";
 
 const instructorsRoutes = Router();
 
-instructorsRoutes.post("", createInstructorController);
+instructorsRoutes.post(
+  "",
+  auhValidationMiddleware,
+  ensureIsAdmMiddleware,
+  createInstructorController
+);
 instructorsRoutes.get("", getAllInstructorsController);
 
 export default instructorsRoutes;
