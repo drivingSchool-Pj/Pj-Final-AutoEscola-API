@@ -14,6 +14,7 @@ import {
 } from "typeorm";
 import { Address } from "./address.entity";
 import { Schedules } from "./schedules.entity";
+import { Exclude } from "class-transformer";
 
 @Entity("users")
 export class User {
@@ -27,6 +28,7 @@ export class User {
   email: string;
 
   @Column({ length: 72 })
+  @Exclude()
   password: string;
 
   @Column()
@@ -36,12 +38,14 @@ export class User {
   contact: string;
 
   @Column({ default: false })
+  @Exclude()
   isAdm: boolean;
 
   @Column({ default: true, type: "boolean" })
   isActive: boolean;
 
   @Column({ length: 2 })
+  @Exclude()
   typeCategorie: string;
 
   @CreateDateColumn({ type: "date" })

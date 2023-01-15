@@ -27,18 +27,14 @@ export const createInstructorService = async (
   if (ExistsInst) throw new AppError("Instructor already exists", 400);
 
   const categoriesRep = AppDataSource.getRepository(Categories);
-
-  if (category.length > 2)
-    throw new AppError("Category must be 2 characters", 400);
-
-  const user = instructorsRep.create({
-    id: id,
-  });
-  await instructorsRep.save(user);
-
-  const categories = categoriesRep.create({
+  const ExistCat = await categoriesRep.findOneBy({
     typeCategorie: category,
   });
+  if (!ExistCat) throw new AppError("Category not found", 404);
 
-  await categoriesRep.save(categories);
+  const user = instructorsRep.create({
+    user: Exists,
+    categories: ExistCat,
+  });
+  await instructorsRep.save(user);
 };
