@@ -11,8 +11,8 @@ import { auhValidationMiddleware } from "../middlewares/ authValidation.middlewa
 const schedulesRoutes = Router();
 
 schedulesRoutes.post("", auhValidationMiddleware, createSchedulesController);
-schedulesRoutes.get("/instructors/:id", auhValidationMiddleware, listScheduleByIdController);
-schedulesRoutes.get("/instructors", listAllSchedulesController);
+schedulesRoutes.get("/:id", auhValidationMiddleware, listScheduleByIdController);
+schedulesRoutes.get("", listAllSchedulesController);
 schedulesRoutes.get("/student/:id", auhValidationMiddleware, listAllSchedulesInUserController)
 
 export default schedulesRoutes;
