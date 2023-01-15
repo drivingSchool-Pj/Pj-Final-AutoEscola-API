@@ -1,9 +1,13 @@
 import { Router } from "express";
-import { softDeleteCategoryController } from "../controllers/categories/deleteCategories,controller";
-import ensureIsAdmMiddleware from "../middlewares/ensureVerifyIsAdm.middleware";
+import { listCategorieForInstructorController } from "../controllers/categories/listCategoriesForInstructor.controller";
+import { auhValidationMiddleware } from "../middlewares/ authValidation.middleware";
 
-const categoriesRoutes = Router()
+const categoriesRoutes = Router();
 
-categoriesRoutes.delete("/:id",ensureIsAdmMiddleware, softDeleteCategoryController);
+categoriesRoutes.get(
+  "/instructors/:id",
+  auhValidationMiddleware,
+  listCategorieForInstructorController
+);
 
-export default categoriesRoutes
+export default categoriesRoutes;
