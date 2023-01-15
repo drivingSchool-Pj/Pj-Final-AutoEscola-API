@@ -3,6 +3,7 @@ import { verify } from "jsonwebtoken";
 import "dotenv/config";
 import { AppError } from "../errors/appError";
 import { IUserDecode } from "../interfaces/user/user.interface";
+import console from "console";
 
 const auhValidationMiddleware = (
   req: Request,
