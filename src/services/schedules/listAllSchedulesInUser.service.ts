@@ -4,7 +4,6 @@ import { User } from "../../entities/user.entity"
 import { AppError } from "../../errors/appError"
 
 export const listAllSchedulesInUserService = async (userId: any, isAdm: boolean, userAcess: string) =>{
-  
   const schedulesRepository = AppDataSource.getRepository(Schedules)
   const userRepository = AppDataSource.getRepository(User)
   
@@ -18,7 +17,8 @@ export const listAllSchedulesInUserService = async (userId: any, isAdm: boolean,
     throw new AppError("You are not authorized to use this route", 401)
   }
 
-  const schedules = await schedulesRepository.find({where:{id: user.id}}) 
+  const allSchedules = await schedulesRepository.find() 
 
-  return schedules
+  return allSchedules
+
 }

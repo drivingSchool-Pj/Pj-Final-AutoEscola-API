@@ -32,7 +32,7 @@ export const createInstructorService = async (
     throw new AppError("Category must be 2 characters", 400);
 
   const user = instructorsRep.create({
-    id: id,
+    user: Exists,
   });
   await instructorsRep.save(user);
 

@@ -14,7 +14,6 @@ const schedulesRoutes = Router();
 schedulesRoutes.post("", auhValidationMiddleware, createSchedulesController);
 schedulesRoutes.get("/:id", auhValidationMiddleware, listScheduleByIdController);
 schedulesRoutes.get("", listAllSchedulesController);
-schedulesRoutes.get("/student/:id", auhValidationMiddleware, listAllSchedulesInUserController)
-schedulesRoutes.get("/instructors/:id", auhValidationMiddleware, listAllSchedulesInIstructorController)
+schedulesRoutes.get("/user/:id", auhValidationMiddleware, listAllSchedulesInUserController)
 
 export default schedulesRoutes;
