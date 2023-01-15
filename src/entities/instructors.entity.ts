@@ -4,24 +4,24 @@ import {
   ManyToOne,
   OneToMany,
   OneToOne,
-  JoinColumn,
-} from "typeorm";
-import { Categories } from "./categories.entity";
-import { Schedules } from "./schedules.entity";
-import { User } from "./user.entity";
+  JoinColumn
+} from 'typeorm'
+import { Categories } from './categories.entity'
+import { Schedules } from './schedules.entity'
+import { User } from './user.entity'
 
-@Entity("instructors")
+@Entity('instructors')
 export class Instructors {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string
 
   @OneToOne(() => User)
   @JoinColumn()
-  user: User;
+  user: User
 
-  @ManyToOne(() => Categories, (categories) => categories.instructors)
-  categories: Categories;
+  @ManyToOne(() => Categories, categories => categories.instructors)
+  categories: Categories
 
-  @OneToMany(() => Schedules, (schedules) => schedules.instructors)
-  schedules: Schedules[];
+  @OneToMany(() => Schedules, schedules => schedules.instructors)
+  schedules: Schedules[]
 }
