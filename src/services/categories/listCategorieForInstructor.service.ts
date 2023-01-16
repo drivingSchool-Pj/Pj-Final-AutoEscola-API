@@ -21,7 +21,7 @@ export const listCategorieForInstructorService = async (
 
   const findInstructor = await instructorsRepository.findOne({
     where: { id: instructorId },
-    relations: { categories: true },
+    relations: { user: true, categories: true },
   });
 
   return findInstructor;
