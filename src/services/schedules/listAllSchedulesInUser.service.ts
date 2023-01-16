@@ -21,10 +21,10 @@ export const listAllSchedulesInUserService = async (
     throw new AppError("You are not authorized to use this route", 401);
   }
 
-  const findSchedules = await schedulesRepository
+  const allSchedules = await schedulesRepository
     .createQueryBuilder("schedules")
     .where("schedules.user = :id", { id: userId })
     .getMany();
-
-  return findSchedules;
-};
+  
+  return allSchedules
+}
