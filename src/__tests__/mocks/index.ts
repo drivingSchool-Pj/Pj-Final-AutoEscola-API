@@ -1,5 +1,5 @@
 import { ICategoryRequest } from "../../interfaces/categories";
-import { IInstructorRequest } from "../../interfaces/instructors";
+import { IInstructorCreate } from "../../interfaces/instructors";
 import { IUserLogin } from "../../interfaces/login";
 import { IScheduleRequest } from "../../interfaces/schedules";
 import { IUserRequest } from "../../interfaces/user";
@@ -32,18 +32,19 @@ export const mockedAdminLogin: IUserLogin = {
   password: "123456",
 };
 
-export const mockedInstructor: IInstructorRequest = {
-  name: "Pedro Furtado",
-  category: "",
-};
-export const mockedInstructor2 = {
-  name: "Carlos José",
-  categoryId: "",
+export const mockedInstructor: IInstructorCreate = {
+  id: "cc59f0ee-ff71-4379-a690-c1a3b4b02457",
+  category: "A",
 };
 
-export const mockedInstructorInvalidCategoryId: IInstructorRequest = {
-  name: "Pedro Furtado",
-  category: "8f9ae6ce-e36c-4d9d-9bd7-b4c98cb4e4f4",
+export const mockedInstructor2: IInstructorCreate = {
+  id: "cc59f0ee-ff71-4379-a690-c1a3b4b02457",
+  category: "B",
+};
+
+export const mockedInstructorInvalidCategoryId: IInstructorCreate = {
+  id: "cc59f0ee-ff71-4379-a690-c1a3b4b02457",
+  category: "A",
 };
 
 export const mockedCategory: ICategoryRequest = {
