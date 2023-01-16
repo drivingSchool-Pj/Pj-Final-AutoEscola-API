@@ -34,7 +34,7 @@ export const mockedAdminLogin: IUserLogin = {
 
 export const mockedInstructor: IInstructorRequest = {
   name: "Pedro Furtado",
-  categoryId: "",
+  category: "",
 };
 export const mockedInstructor2 = {
   name: "Carlos José",
@@ -43,7 +43,7 @@ export const mockedInstructor2 = {
 
 export const mockedInstructorInvalidCategoryId: IInstructorRequest = {
   name: "Pedro Furtado",
-  categoryId: "8f9ae6ce-e36c-4d9d-9bd7-b4c98cb4e4f4",
+  category: "8f9ae6ce-e36c-4d9d-9bd7-b4c98cb4e4f4",
 };
 
 export const mockedCategory: ICategoryRequest = {
