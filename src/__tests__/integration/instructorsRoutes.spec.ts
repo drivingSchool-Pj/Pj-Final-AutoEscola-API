@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
-import AppDataSource from "../../../data-source";
+import AppDataSource from "../../data-source";
 import request from "supertest";
-import app from "../../../app";
+import app from "../../app";
 import {
   mockedUser,
   mockedAdmin,
@@ -10,7 +10,7 @@ import {
   mockedUserLogin,
   mockedInstructor,
   mockedInstructorInvalidCategoryId,
-} from "../../mocks/index";
+} from "../mocks/index";
 
 describe("/instructor", () => {
   let connection: DataSource;
