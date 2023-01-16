@@ -17,6 +17,13 @@ describe("Testing user routes", () => {
     cpf: "999.999.999-99",
     isAdm: true,
     typeCategory: "A",
+    address: {
+      street: "rua batata",
+      complement: "perto do ceasa",
+      number: 666,
+      city: "Ananindeua",
+      state: "PA",
+    },
   };
   const userLogin = {
     email: "batata@batata.com",
@@ -70,6 +77,13 @@ describe("Testing user routes", () => {
       cpf: "999.999.999-99",
       isAdm: true,
       typeCategory: "Z",
+      address: {
+        street: "rua batata",
+        complement: "perto do ceasa",
+        number: 666,
+        city: "Ananindeua",
+        state: "PA",
+      },
     };
 
     const res = await request(app).post("/user").send(wrongUser);
@@ -89,6 +103,13 @@ describe("Testing user routes", () => {
       cpf: "999.999.999-98",
       isAdm: false,
       typeCategory: "B",
+      address: {
+        street: "rua batata",
+        complement: "perto do ceasa",
+        number: 666,
+        city: "Ananindeua",
+        state: "PA",
+      },
     };
 
     const res1 = await request(app).post("/user").send(user);
@@ -111,6 +132,13 @@ describe("Testing user routes", () => {
       cpf: "999.999.999-98",
       isAdm: false,
       typeCategory: "B",
+      address: {
+        street: "rua batata",
+        complement: "perto do ceasa",
+        number: 666,
+        city: "Ananindeua",
+        state: "PA",
+      },
     };
 
     await request(app).post("/user").send(user);
@@ -173,6 +201,13 @@ describe("Testing user routes", () => {
       cpf: "999.999.999-98",
       isAdm: false,
       typeCategory: "B",
+      address: {
+        street: "rua batata",
+        complement: "perto do ceasa",
+        number: 666,
+        city: "Ananindeua",
+        state: "PA",
+      },
     };
 
     const updatedUser2 = {
@@ -267,6 +302,13 @@ describe("Testing user routes", () => {
       cpf: "999.999.999-98",
       isAdm: false,
       typeCategory: "B",
+      address: {
+        street: "rua batata",
+        complement: "perto do ceasa",
+        number: 666,
+        city: "Ananindeua",
+        state: "PA",
+      },
     };
 
     const createdUser2 = await request(app).get("/user").send(user2);
@@ -299,6 +341,13 @@ describe("Testing user routes", () => {
       cpf: "999.999.999-98",
       isAdm: false,
       typeCategory: "B",
+      address: {
+        street: "rua batata",
+        complement: "perto do ceasa",
+        number: 666,
+        city: "Ananindeua",
+        state: "PA",
+      },
     };
 
     const user2login = {
