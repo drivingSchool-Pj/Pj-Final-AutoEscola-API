@@ -3,11 +3,14 @@ import { createInstructorController } from "../controllers/instructors/createIns
 import { getAllInstructorsController } from "../controllers/instructors/getInstructors.controller";
 import { auhValidationMiddleware } from "../middlewares/ authValidation.middleware";
 import ensureIsAdmMiddleware from "../middlewares/ensureVerifyIsAdm.middleware";
+import { validateSchemaMiddleware } from "../middlewares/validatedSchemas.middleware";
+import { instructorValidationCreated } from "../validations/schemas";
 
 const instructorsRoutes = Router();
 
 instructorsRoutes.post(
   "",
+  validateSchemaMiddleware(instructorValidationCreated),
   auhValidationMiddleware,
   ensureIsAdmMiddleware,
   createInstructorController

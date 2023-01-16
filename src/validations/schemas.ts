@@ -54,7 +54,12 @@ export const userRegisterValidation: any = yup.object().shape({
   }),
 });
 
-export const updateUser = yup.object().shape({
+export const loginValidation = yup.object().shape({
+  email: yup.string().required(),
+  password: yup.string().required(),
+});
+
+export const userValidationPatch = yup.object().shape({
   id: yup.string(),
   name: yup.string(),
   email: yup.string().email(),
@@ -64,7 +69,18 @@ export const updateUser = yup.object().shape({
   isActive: yup.boolean(),
 });
 
-export const schedulesValidation = yup.object().shape({
+export const instructorValidationCreated = yup.object().shape({
+  id: yup.string().required(),
+  category: yup
+    .string()
+    .required()
+    .matches(
+      /(?=.*[A-E])/gi,
+      "The driving license type is invalid. Type a letter from A - E"
+    ),
+});
+
+export const schedulesValidationCreated = yup.object().shape({
   date: yup.string().required(),
   hour: yup.string().required(),
   instructorsId: yup.string().required(),

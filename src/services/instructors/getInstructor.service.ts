@@ -7,6 +7,7 @@ export const getAllInstructorsService = async () => {
   const data = await repInst.find({
     relations: {
       user: true,
+      categories: true,
     },
   });
 
