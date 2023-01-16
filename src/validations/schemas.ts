@@ -64,10 +64,26 @@ export const updateUser = yup.object().shape({
   isActive: yup.boolean(),
 });
 
-export const Schedules = yup.object().shape({
+export const schedulesValidation = yup.object().shape({
   date: yup.string().required(),
   hour: yup.string().required(),
   instructorsId: yup.string().required(),
   userId: yup.string().required(),
   locationId: yup.string().required(),
+});
+
+export const locationValidationCreate = yup.object().shape({
+  id: yup.string().notRequired(),
+  street: yup.string().required(),
+  state: yup.string().required(),
+  city: yup.string().required(),
+  complement: yup.string().notRequired(),
+});
+
+export const locationValidationPatch = yup.object().shape({
+  id: yup.string().notRequired(),
+  street: yup.string().notRequired(),
+  state: yup.string().notRequired(),
+  city: yup.string().notRequired(),
+  complement: yup.string().notRequired(),
 });
