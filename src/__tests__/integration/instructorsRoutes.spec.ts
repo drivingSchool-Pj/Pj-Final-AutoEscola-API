@@ -44,7 +44,7 @@ describe("/instructor", () => {
     const adminLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin);
-    mockedInstructor.categoryId = categories.body[0].id;
+    mockedInstructor.category = categories.body[0].id;
     const response = await request(app)
       .post("/instructor")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
@@ -61,7 +61,7 @@ describe("/instructor", () => {
     const adminLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin);
-    mockedInstructor.categoryId = categories.body[0].id;
+    mockedInstructor.category = categories.body[0].id;
     const response = await request(app)
       .post("/instructor")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
@@ -76,7 +76,7 @@ describe("/instructor", () => {
     const userLoginResponse = await request(app)
       .post("/login")
       .send(mockedUserLogin);
-    mockedInstructor.categoryId = categories.body[0].id;
+    mockedInstructor.category = categories.body[0].id;
     const response = await request(app)
       .post("/instructor")
       .set("Authorization", `Bearer ${userLoginResponse.body.token}`)
@@ -88,7 +88,7 @@ describe("/instructor", () => {
 
   test("POST /instructor -  should not be able to create a instructor without authentication", async () => {
     const categories = await request(app).get("/categories");
-    mockedInstructor.categoryId = categories.body[0].id;
+    mockedInstructor.category = categories.body[0].id;
     const response = await request(app)
       .post("/instructor")
       .send(mockedInstructor);
@@ -97,7 +97,7 @@ describe("/instructor", () => {
     expect(response.status).toBe(401);
   });
 
-  test("POST /instructor -  should not be able to create instructor with invalid categoryId", async () => {
+  test("POST /instructor -  should not be able to create instructor with invalid category", async () => {
     const adminLoginResponse = await request(app)
       .post("/login")
       .send(mockedAdminLogin);

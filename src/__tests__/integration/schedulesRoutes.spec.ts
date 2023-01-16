@@ -38,8 +38,8 @@ describe("/schedules", () => {
       .post("/categories")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
       .send(mockedCategory);
-    mockedInstructor.categoryId = categories.body.id;
-    mockedInstructor2.categoryId = categories.body.id;
+    mockedInstructor.category = categories.body.id;
+    mockedInstructor2.category = categories.body.id;
     await request(app)
       .post("/instructor")
       .set("Authorization", `Bearer ${adminLoginResponse.body.token}`)
