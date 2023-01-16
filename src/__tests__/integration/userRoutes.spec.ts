@@ -41,7 +41,7 @@ describe("Testing user routes", () => {
   });
 
   test("Should be able to create user", async () => {
-    const res = await request(app).post("/users").send(user);
+    const res = await request(app).post("/user").send(user);
 
     expect(res.status).toBe(201);
     expect(res.body).toEqual(expect.objectContaining(user));
@@ -53,7 +53,7 @@ describe("Testing user routes", () => {
         updatedAt: expect.any(String),
       })
     );
-    expect(res.body).not.toHaveProperty("password")
+    expect(res.body).not.toHaveProperty("password");
     const [userCreated, amount] = await userRepo.findAndCountBy({
       id: res.body.id,
     });
@@ -72,7 +72,7 @@ describe("Testing user routes", () => {
       typeCategory: "Z",
     };
 
-    const res = await request(app).post("/users").send(wrongUser);
+    const res = await request(app).post("/user").send(wrongUser);
 
     expect(res.status).toBe(400);
     expect(res.body).toHaveProperty("message");
@@ -91,15 +91,15 @@ describe("Testing user routes", () => {
       typeCategory: "B",
     };
 
-    const res1 = await request(app).post("/users").send(user);
+    const res1 = await request(app).post("/user").send(user);
 
-    const res2 = await request(app).post("/users").send(wrongUser);
+    const res2 = await request(app).post("/user").send(wrongUser);
 
     expect(res2.status).toBe(400);
     expect(res2.body).toHaveProperty("message");
   });
   test("Should be able to list all users", async () => {
-    await request(app).get("/users").send(user);
+    await request(app).get("/user").send(user);
     const resToken = await request(app).post("/login").send(userLogin);
 
     const user2 = {
@@ -113,8 +113,8 @@ describe("Testing user routes", () => {
       typeCategory: "B",
     };
 
-    await request(app).post("/users").send(user);
-    await request(app).post("/users").send(user2);
+    await request(app).post("/user").send(user);
+    await request(app).post("/user").send(user2);
 
     const res = await request(app)
       .get("/users")
@@ -128,13 +128,13 @@ describe("Testing user routes", () => {
   });
 
   test("Should not be able to list without being adm", async () => {
-    const res = await request(app).get("/users").send();
+    const res = await request(app).get("/user").send();
 
     expect(res.status).toBe(401);
     expect(res.body).toHaveProperty("message");
   });
   test("Should be able to update themself", async () => {
-    const createUser = await request(app).get("/users").send(user);
+    const createUser = await request(app).get("/user").send(user);
     const resToken = await request(app).post("/login").send(userLogin);
 
     const updatedUser = {
@@ -161,7 +161,7 @@ describe("Testing user routes", () => {
     );
   });
   test("Should be able to update another user being adm", async () => {
-    const createUser = await request(app).get("/users").send(user);
+    const createUser = await request(app).get("/user").send(user);
     const resToken = await request(app).post("/login").send(userLogin);
 
     const user2 = {
@@ -181,10 +181,10 @@ describe("Testing user routes", () => {
       contact: 40028924,
     };
 
-    const createUser2 = await request(app).get("/users").send(user2);
+    const createUser2 = await request(app).get("/user").send(user2);
 
     const res = await request(app)
-      .patch(`/users/${createUser2.body.id}`)
+      .patch(`/user/${createUser2.body.id}`)
       .set("Authorization", `Bearer ${resToken.body.token}`)
       .send(updatedUser2);
 
@@ -200,7 +200,7 @@ describe("Testing user routes", () => {
   });
 
   test("Should not be able to update other without being adm", async () => {
-    const createUser = await request(app).get("/users").send(user);
+    const createUser = await request(app).get("/user").send(user);
 
     const user2 = {
       name: "batatão",
@@ -224,11 +224,11 @@ describe("Testing user routes", () => {
       contact: 40028929,
     };
 
-    await request(app).get("/users").send(user2);
+    await request(app).get("/user").send(user2);
     const resToken = await request(app).post("/login").send(user2login);
 
     const res = await request(app)
-      .patch(`/users/${createUser.body.id}`)
+      .patch(`/user/${createUser.body.id}`)
       .set("Authorization", `Bearer ${resToken.body.token}`)
       .send(updatedUser);
 
@@ -236,7 +236,7 @@ describe("Testing user routes", () => {
     expect(res.body).toHaveProperty("message");
   });
   test("Should not be able to update id, isAdm or isActive", async () => {
-    const createUser = await request(app).get("/users").send(user);
+    const createUser = await request(app).get("/user").send(user);
     const resToken = await request(app).post("/login").send(userLogin);
 
     const updatedUser = {
@@ -255,7 +255,7 @@ describe("Testing user routes", () => {
   });
 
   test("Should be able to delete", async () => {
-    await request(app).get("/users").send(user);
+    await request(app).get("/user").send(user);
     const resToken = await request(app).post("/login").send(userLogin);
 
     const user2 = {
@@ -269,10 +269,10 @@ describe("Testing user routes", () => {
       typeCategory: "B",
     };
 
-    const createdUser2 = await request(app).get("/users").send(user2);
+    const createdUser2 = await request(app).get("/user").send(user2);
 
     const res = await request(app)
-      .delete(`/users/${createdUser2.body.id}`)
+      .delete(`/user/${createdUser2.body.id}`)
       .set("Authorization", `Bearer ${resToken.body.token}`)
       .send();
 
@@ -288,7 +288,7 @@ describe("Testing user routes", () => {
     );
   });
   test("Should not be able to delete without being adm", async () => {
-    const createUser = await request(app).get("/users").send(user);
+    const createUser = await request(app).get("/user").send(user);
 
     const user2 = {
       name: "batatão",
@@ -306,11 +306,11 @@ describe("Testing user routes", () => {
       password: "batatão",
     };
 
-    await request(app).post("/users").send(user2);
+    await request(app).post("/user").send(user2);
     const resToken = await request(app).post("/login").send(user2login);
 
     const res = await request(app)
-      .delete(`/users/${createUser.body.id}`)
+      .delete(`/user/${createUser.body.id}`)
       .set("Authorization", `Bearer ${resToken.body.token}`)
       .send();
 
