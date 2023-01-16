@@ -2,9 +2,7 @@ import request from "supertest";
 import app from "../../app";
 import { DataSource } from "typeorm";
 import AppDataSource from "../../data-source";
-import { describe } from "node:test";
 import { User } from "../../entities/user.entity";
-import { sign } from "jsonwebtoken";
 
 describe("Testing user routes", () => {
   let connection: DataSource;
@@ -55,9 +53,7 @@ describe("Testing user routes", () => {
         updatedAt: expect.any(String),
       })
     );
-    expect(res.body).not.toEqual(
-      expect.objectContaining({ password: expect.any(String) })
-    );
+    expect(res.body).not.toHaveProperty("password")
     const [userCreated, amount] = await userRepo.findAndCountBy({
       id: res.body.id,
     });
@@ -79,9 +75,7 @@ describe("Testing user routes", () => {
     const res = await request(app).post("/users").send(wrongUser);
 
     expect(res.status).toBe(400);
-    expect(res.body).toEqual(
-      expect.objectContaining({ message: expect.any(String) })
-    );
+    expect(res.body).toHaveProperty("message");
     const [users, amount] = await userRepo.findAndCount();
     expect(amount).toBe(0);
   });
@@ -98,17 +92,15 @@ describe("Testing user routes", () => {
     };
 
     const res1 = await request(app).post("/users").send(user);
-    try {
-      const res2 = await request(app).post("/users").send(wrongUser);
-    } catch (err) {
-      expect(err.status).toBe(400);
-      expect(err.message).toEqual(expect.any(String));
-    }
+
+    const res2 = await request(app).post("/users").send(wrongUser);
+
+    expect(res2.status).toBe(400);
+    expect(res2.body).toHaveProperty("message");
   });
   test("Should be able to list all users", async () => {
-    const token = sign("batata@batata.com", "testesegredin", {
-      subject: "batata",
-    });
+    await request(app).get("/users").send(user);
+    const resToken = await request(app).post("/login").send(userLogin);
 
     const user2 = {
       name: "batatão",
@@ -121,12 +113,12 @@ describe("Testing user routes", () => {
       typeCategory: "B",
     };
 
-    const send = await request(app).post("/users").send(user);
-    const send2 = await request(app).post("/users").send(user2);
+    await request(app).post("/users").send(user);
+    await request(app).post("/users").send(user2);
 
     const res = await request(app)
       .get("/users")
-      .set("Authorization", `Bearer ${token}`)
+      .set("Authorization", `Bearer ${resToken.body.token}`)
       .send();
     expect(res.status).toBe(200);
     expect(res.body).toHaveProperty("map");
@@ -139,7 +131,7 @@ describe("Testing user routes", () => {
     const res = await request(app).get("/users").send();
 
     expect(res.status).toBe(401);
-    expect(res.body).toEqual({ message: expect.any(String) });
+    expect(res.body).toHaveProperty("message");
   });
   test("Should be able to update themself", async () => {
     const createUser = await request(app).get("/users").send(user);
@@ -287,8 +279,8 @@ describe("Testing user routes", () => {
     const userDeleted = await userRepo.findBy({
       id: createdUser2.body.id,
     });
-    expect(res.status).toBe(209)
-    expect(res.body).toBeUndefined()
+    expect(res.status).toBe(209);
+    expect(res.body).toBeUndefined();
     expect(userDeleted).toEqual(
       expect.objectContaining({
         isActive: false,
@@ -324,5 +316,5 @@ describe("Testing user routes", () => {
 
     expect(res.status).toBe(401);
     expect(res.body).toHaveProperty("message");
-  })
+  });
 });
