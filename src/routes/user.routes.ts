@@ -13,7 +13,7 @@ import ensureIsAdmMiddleware from "../middlewares/ensureVerifyIsAdm.middleware";
 
 export const userRoutes = Router();
 
-userRoutes.delete("/:id", softDeleteUserController);
+userRoutes.delete("/:id", auhValidationMiddleware, softDeleteUserController);
 
 userRoutes.post(
   "",
