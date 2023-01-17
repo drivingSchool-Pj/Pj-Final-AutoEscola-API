@@ -5,7 +5,6 @@ import app from "../../app";
 import {
   mockedAdmin,
   mockedAdminLogin,
-  mockedCategory,
   mockedUser,
   mockedUserLogin,
 } from "../mocks/index";

@@ -116,3 +116,5 @@ describe("/instructor", () => {
     expect(response.status).toBe(200);
   });
 });
+
+//falta delete instructor
