@@ -44,8 +44,7 @@ describe("Testing user routes", () => {
       .catch((err) => {
         console.error("Error during Data Source initialization", err);
       });
-    const userTest = await request(app).post("/user").send(user);
-    console.log(userTest.body);
+    await request(app).post("/user").send(user);
   });
 
   afterAll(async () => {
@@ -58,7 +57,6 @@ describe("Testing user routes", () => {
       .post("/location")
       .set("Authorization", `Bearer ${userLogged.body.token}`)
       .send(loc);
-    console.log(location.body);
     expect(location.status).toBe(201);
     expect(location.body).toHaveProperty("id");
     expect(location.body).toHaveProperty("createdAt");
