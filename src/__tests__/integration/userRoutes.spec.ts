@@ -16,7 +16,7 @@ describe("Testing user routes", () => {
     age: 98,
     cpf: "999.999.999-99",
     isAdm: true,
-    typeCategory: "A",
+    typeCategorie: "A",
     address: {
       street: "rua batata",
       complement: "perto do ceasa",
@@ -76,7 +76,7 @@ describe("Testing user routes", () => {
       age: 9105,
       cpf: "999.999.999-99",
       isAdm: true,
-      typeCategory: "Z",
+      typeCategorie: "Z",
       address: {
         street: "rua batata",
         complement: "perto do ceasa",
@@ -102,7 +102,7 @@ describe("Testing user routes", () => {
       age: 97,
       cpf: "999.999.999-98",
       isAdm: false,
-      typeCategory: "B",
+      typeCategorie: "B",
       address: {
         street: "rua batata",
         complement: "perto do ceasa",
@@ -131,7 +131,7 @@ describe("Testing user routes", () => {
       age: 97,
       cpf: "999.999.999-98",
       isAdm: false,
-      typeCategory: "B",
+      typeCategorie: "B",
       address: {
         street: "rua batata",
         complement: "perto do ceasa",
@@ -169,7 +169,7 @@ describe("Testing user routes", () => {
       name: "batat",
       email: "batat@batata.com",
       password: "batat",
-      typeCategory: "C",
+      typeCategorie: "C",
     };
 
     const res = await request(app)
@@ -184,7 +184,7 @@ describe("Testing user routes", () => {
         name: "batat",
         email: "batat@batata.com",
         password: "batat",
-        typeCategory: "C",
+        typeCategorie: "C",
       })
     );
   });
@@ -200,7 +200,7 @@ describe("Testing user routes", () => {
       age: 97,
       cpf: "999.999.999-98",
       isAdm: false,
-      typeCategory: "B",
+      typeCategorie: "B",
       address: {
         street: "rua batata",
         complement: "perto do ceasa",
@@ -245,7 +245,7 @@ describe("Testing user routes", () => {
       age: 97,
       cpf: "999.999.999-98",
       isAdm: false,
-      typeCategory: "B",
+      typeCategorie: "B",
     };
 
     const user2login = {
@@ -301,7 +301,7 @@ describe("Testing user routes", () => {
       age: 97,
       cpf: "999.999.999-98",
       isAdm: false,
-      typeCategory: "B",
+      typeCategorie: "B",
       address: {
         street: "rua batata",
         complement: "perto do ceasa",
@@ -340,7 +340,7 @@ describe("Testing user routes", () => {
       age: 97,
       cpf: "999.999.999-98",
       isAdm: false,
-      typeCategory: "B",
+      typeCategorie: "B",
       address: {
         street: "rua batata",
         complement: "perto do ceasa",
