@@ -1,6 +1,10 @@
 import { Router } from "express";
 import { createInstructorController } from "../controllers/instructors/createInstructor.controller";
-import { getAllInstructorsController } from "../controllers/instructors/getInstructors.controller";
+import { deleteInstructorController } from "../controllers/instructors/deleteInstructors.controller";
+import {
+  getAllInstructorsController,
+  getOneInstructorController,
+} from "../controllers/instructors/getInstructors.controller";
 import { auhValidationMiddleware } from "../middlewares/ authValidation.middleware";
 import ensureIsAdmMiddleware from "../middlewares/ensureVerifyIsAdm.middleware";
 import { validateSchemaMiddleware } from "../middlewares/validatedSchemas.middleware";
@@ -16,5 +20,17 @@ instructorsRoutes.post(
   createInstructorController
 );
 instructorsRoutes.get("", getAllInstructorsController);
+instructorsRoutes.get(
+  "/:id",
+  auhValidationMiddleware,
+  ensureIsAdmMiddleware,
+  getOneInstructorController
+);
+instructorsRoutes.delete(
+  "/:id",
+  auhValidationMiddleware,
+  ensureIsAdmMiddleware,
+  deleteInstructorController
+);
 
 export default instructorsRoutes;
