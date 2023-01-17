@@ -12,10 +12,10 @@ export const createLoginService = async (data: IUserLogin): Promise<Object> => {
   const userRepository = AppDataSource.getRepository(User);
   const user = await userRepository.findOneBy({ email: email });
 
-  if (!user) throw new AppError("User or password invalid!", 403);
+  if (!user) throw new AppError("User or password invalid! 1", 403);
 
   const pass = await compare(password, user.password);
-  if (!pass) throw new AppError("User or password invalid!", 403);
+  if (!pass) throw new AppError("User or password invalid! 2", 403);
 
   if (!user.isActive) throw new AppError("User is not active!", 400);
 

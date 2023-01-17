@@ -75,6 +75,11 @@ export const mockedAdminLogin: IUserLogin = {
   password: "1234",
 };
 
+export const mockedAdminLoginInvalid: IUserLogin = {
+  email: "joaopereiraxx@gmail.com",
+  password: "1234",
+};
+
 export const mockedInstructor: IInstructorCreate = {
   id: "cc59f0ee-ff71-4379-a690-c1a3b4b02457",
   category: "A",
