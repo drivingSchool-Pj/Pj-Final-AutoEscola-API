@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { createLocationController } from "../controllers/location/createLocation.controller";
 import { listLocationaController } from "../controllers/location/listLocation.controller";
 import { listLocationByIdDataController } from "../controllers/location/listLocationById.controller";
 import { updateLocationController } from "../controllers/location/updateLocation.controller";
@@ -25,14 +24,6 @@ locationRoutes.get(
   auhValidationMiddleware,
   ensureIsAdmMiddleware,
   listLocationByIdDataController
-);
-
-locationRoutes.post(
-  "",
-  validateSchemaMiddleware(locationValidationCreate),
-  auhValidationMiddleware,
-  ensureIsAdmMiddleware,
-  createLocationController
 );
 
 locationRoutes.patch(
