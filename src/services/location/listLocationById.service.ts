@@ -1,7 +1,7 @@
 import AppDataSource from "../../data-source";
 import { Location } from "../../entities/location.entity";
 
-export const listLocationDataService = async (locationId: string) => {
+export const listLocationByIdService = async (locationId: string) => {
   const locationRepository = AppDataSource.getRepository(Location);
 
   const locationData = await locationRepository.findOneBy({
