@@ -1,5 +1,7 @@
+import { string } from "yup";
 import { ICategoryRequest } from "../../interfaces/categories";
 import { IInstructorCreate } from "../../interfaces/instructors";
+import { ILocationRequest } from "../../interfaces/location/location.interface";
 import { IUserLogin } from "../../interfaces/login";
 import { IScheduleRequest } from "../../interfaces/schedules";
 import {
@@ -132,3 +134,17 @@ export const mockedScheduleInvalidHourMore17: IScheduleRequest = {
   instructorId: "",
   userId: "",
 };
+
+export const mockedCreateLocation: ILocationRequest = {
+  street: "rua teste",
+  complement: "apto 43",
+  city: "Guarujá",
+  state: "Sp"
+}
+
+export const mockedUpdateLocation: ILocationRequest = {
+  street: "rua update",
+  complement: "apto update",
+  city: "update",
+  state: "Sp"
+}

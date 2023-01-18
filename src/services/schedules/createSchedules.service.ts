@@ -6,7 +6,7 @@ import { AppError } from "../../errors/appError";
 import { IScheduleRequest } from "../../interfaces/schedules/schedules.interface";
 
 export const createSchedulesService = async (
-  data,
+  data: any,
   userId: string,
   instructorId: string
 ) => {
