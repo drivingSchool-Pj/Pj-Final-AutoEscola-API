@@ -9,6 +9,6 @@ export const createInstructorController = async (
   const data: IInstructorCreate = request.body;
   await createInstructorService(data);
   return response
-    .status(200)
+    .status(201)
     .json({ message: "Instructor created successfully" });
 };

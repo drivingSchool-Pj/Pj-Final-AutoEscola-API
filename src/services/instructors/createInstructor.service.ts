@@ -21,9 +21,13 @@ export const createInstructorService = async (
 
   const instructorsRep = AppDataSource.getRepository(Instructors);
 
-  const ExistsInst = await instructorsRep.findOneBy({
-    id: id,
+  const instructors = await instructorsRep.find({
+    relations: {
+      user: true,
+    },
   });
+
+  const ExistsInst = instructors.some((elem) => elem.user.id === id);
   if (ExistsInst) throw new AppError("Instructor already exists", 400);
 
   const categoriesRep = AppDataSource.getRepository(Categories);
