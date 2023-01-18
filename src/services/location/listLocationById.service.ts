@@ -8,5 +8,7 @@ export const listLocationDataService = async (locationId: string) => {
     id: locationId,
   });
 
+  console.log(locationData);
+
   return locationData;
 };
