@@ -6,6 +6,7 @@ import { AppError } from "../../errors/appError";
 import { IScheduleRequest } from "../../interfaces/schedules/schedules.interface";
 import { User } from "../../entities/user.entity";
 
+
 export const createSchedulesService = async (data: IScheduleRequest) => {
   const { date, hour, locationId, userId, instructorsId } = data;
 
