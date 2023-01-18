@@ -4,6 +4,8 @@ import {
   Column,
   ManyToOne,
   OneToMany,
+  OneToOne,
+  JoinColumn,
 } from "typeorm";
 import { Instructors } from "./instructors.entity";
 import { Location } from "./location.entity";
@@ -26,6 +28,7 @@ export class Schedules {
   @ManyToOne(() => Instructors, (instructors) => instructors.schedules)
   instructors: Instructors;
 
-  @OneToMany(() => Location, (location) => location.schedules)
-  location: Location[];
+  @OneToOne(() => Location)
+  @JoinColumn()
+  location: Location;
 }

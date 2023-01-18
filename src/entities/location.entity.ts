@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
 import { Schedules } from "./schedules.entity";
 
 @Entity("location")
@@ -17,7 +25,4 @@ export class Location {
 
   @Column({ length: 100 })
   complement: string;
-
-  @ManyToOne(() => Schedules, (schedules) => schedules.location)
-  schedules: Schedules;
 }
