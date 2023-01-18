@@ -1,10 +1,8 @@
 import { Router } from "express";
+import { createSchedulesController } from "../controllers/schedules/createSchedules.controller";
+import { listAllSchedulesController } from "../controllers/schedules/listAllSchedules.controller";
 import { listAllSchedulesInUserController } from "../controllers/schedules/listAllSchedulesInUser.controller";
-import {
-  createSchedulesController,
-  listAllSchedulesController,
-  listScheduleByIdController,
-} from "../controllers/schedules/schedules.controllers";
+import { listScheduleByIdController } from "../controllers/schedules/listScheduleByIdController";
 import { auhValidationMiddleware } from "../middlewares/ authValidation.middleware";
 import { validateSchemaMiddleware } from "../middlewares/validatedSchemas.middleware";
 import { schedulesValidationCreated } from "../validations/schemas";
