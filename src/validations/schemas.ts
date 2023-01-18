@@ -93,7 +93,7 @@ export const locationValidationCreate = yup.object().shape({
   street: yup.string().required(),
   state: yup.string().required(),
   city: yup.string().required(),
-  complement: yup.string().notRequired(),
+  complement: yup.string().required(),
 });
 
 export const locationValidationPatch = yup.object().shape({
