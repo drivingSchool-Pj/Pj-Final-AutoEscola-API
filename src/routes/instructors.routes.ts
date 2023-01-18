@@ -1,14 +1,12 @@
 import { Router } from "express";
 import { createInstructorController } from "../controllers/instructors/createInstructor.controller";
 import { deleteInstructorController } from "../controllers/instructors/deleteInstructors.controller";
-import {
-  getAllInstructorsController,
-  getOneInstructorController,
-} from "../controllers/instructors/getInstructors.controller";
+import { getOneInstructorController } from "../controllers/instructors/getInstructor.controller";
 import { auhValidationMiddleware } from "../middlewares/ authValidation.middleware";
 import ensureIsAdmMiddleware from "../middlewares/ensureVerifyIsAdm.middleware";
 import { validateSchemaMiddleware } from "../middlewares/validatedSchemas.middleware";
 import { instructorValidationCreated } from "../validations/schemas";
+import { getAllInstructorsController } from "../controllers/instructors/getInstructors.controller copy";
 
 const instructorsRoutes = Router();
 
