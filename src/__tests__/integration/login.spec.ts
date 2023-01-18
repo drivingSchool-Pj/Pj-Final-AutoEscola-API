@@ -38,7 +38,12 @@ describe("Testing login routes", () => {
     expect(res.status).toBe(403);
   });
 
-  /*test("POST /login -  should not be able to login with the user with isActive = false", async () => {
-   
-  });*/
+  test("POST /login -  should not be able to login with the user with isActive = false", async () => {  
+    const userToDelete = await request(app).post("/user").send(mockedAdmin);
+    await request(app).delete(`/delete/${userToDelete.body.id}`).send()
+    const res = await request(app).post("/login").send(mockedAdminLogin)
+
+    expect(res.status).toBe(400)
+    expect(res.body).toHaveProperty("message")
+  });
 });
