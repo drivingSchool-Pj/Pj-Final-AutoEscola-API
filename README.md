@@ -7,7 +7,7 @@
 <br/>
 
 ```http
-POST /user
+  POST /user
 ```
 
 <br/>
@@ -92,7 +92,7 @@ POST /user
 <br/>
 
 ```http
-GET /user
+  GET /user
 ```
 
 <br/>
@@ -294,9 +294,9 @@ GET /user
     { 
        "street": "Bandeirantes",
        "state": "RJ",
-	   "city": "Rio de Janeiro",
-	   "complement": "fundos",
-	   "id": "30fa9301-ea26-450f-8fdc-200ff7d90071"
+       "city": "Rio de Janeiro",
+       "complement": "fundos",
+       "id": "30fa9301-ea26-450f-8fdc-200ff7d90071"
     }
 
 <br/>
@@ -329,7 +329,7 @@ GET /user
 		"complement": "fundos"
       }
 	  {
-		"id": "83e0bb56-a785-4b04-80c1-cf8e70b7db8e",
+	        "id": "83e0bb56-a785-4b04-80c1-cf8e70b7db8e",
 		"street": "Oscar Freire",
 		"state": "SP",
 		"city": "São Paulo",
@@ -352,7 +352,7 @@ GET /user
 
 | Parâmetro | Tipo     | Descrição                      |
 | :--------:| :-------:| :-----------------------------:|
-| `id`      | `string` | **Obrigatório** id do usuário. |
+| `id`      | `string` | **Obrigatório** id da location.|
 
 
 <br/>
@@ -366,7 +366,7 @@ GET /user
       
       {
 
-    	"id": "83e0bb56-a785-4b04-80c1-cf8e70b7db8e",
+    	    "id": "83e0bb56-a785-4b04-80c1-cf8e70b7db8e",
 	    "street": "Oscar Freire",
 	    "state": "SP",
 	    "city": "São Paulo",
@@ -388,7 +388,7 @@ GET /user
 
 | Parâmetro | Tipo     | Descrição                      |
 | :--------:| :-------:| :-----------------------------:|
-| `id`      | `string` | **Obrigatório** id do usuário. |
+| `id`      | `string` | **Obrigatório** id da location.|
 
 
 <br/>
@@ -412,7 +412,7 @@ GET /user
       
       {
 
-    	"id": "30fa9301-ea26-450f-8fdc-200ff7d90071",
+        "id": "30fa9301-ea26-450f-8fdc-200ff7d90071",
 	    "street": "Bandeirantes",
 	    "state": "RJ",
 	    "city": "Rio de Janeiro",
@@ -502,7 +502,7 @@ GET /user
     [
 
      {
-        "id": "2000ee2f-98a7-4100-9da3-81b881a9ba68",
+            "id": "2000ee2f-98a7-4100-9da3-81b881a9ba68",
 		"date": "2023-11-27",
 		"hour": "08:00:00"
     },
@@ -524,7 +524,7 @@ GET /user
 <br/>
 
 ```http
-GET /schedules/<id>
+  GET /schedules/<id>
 ```
 <br/>
 
@@ -555,7 +555,7 @@ GET /schedules/<id>
 <br/>
 
 ```http
-GET /schedules/user/<id>
+  GET /schedules/user/<id>
 ```
 <br/>
 
@@ -575,7 +575,7 @@ GET /schedules/user/<id>
     [
 
      {
-        "id": "2000ee2f-98a7-4100-9da3-81b881a9ba68",
+            "id": "2000ee2f-98a7-4100-9da3-81b881a9ba68",
 		"date": "2023-11-27",
 		"hour": "08:00:00"
     },
@@ -600,7 +600,7 @@ GET /schedules/user/<id>
 <br/>
 
 ```http
-POST /instructors
+  POST /instructors
 ```
 <br/>
 
@@ -640,7 +640,7 @@ POST /instructors
 <br/>
 
 ```http
-GET /instructors
+  GET /instructors
 ```
 
 <br/>
